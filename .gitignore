@@ -1,0 +1,6 @@
+.idea
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+/server/node_modules
+General_ledger_System.iml
