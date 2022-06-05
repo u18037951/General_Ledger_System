@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const userRoutes = require('./routes/functions/Fixed_Assets');
+const userRoutes = require('./routes/endpoints/Employees');
 //const cors =require('cors')
 
 app.use(morgan("dev"));
