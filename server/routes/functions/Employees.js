@@ -1,4 +1,5 @@
 const saveData= require("../../database/myDatabase")
+const {Collection} = require("mongoose");
 /** This function adds employee details to the database
  * @param {string} email Auto generated ID.
  * @param {object} user_info object containing employee details.
@@ -14,8 +15,15 @@ const add_employees=async (email, user_info )=>{
          }
         await saveData.saveData('Employees', user_info.PersonType, created_object)
 }
-// add_employees('','').then(data=>{
-//      console.log(data)
-//     }
-// )
-module.exports={add_employees};
+const get_employees=async (Type)=>{
+    return await saveData.getAllEmployees('Employees').then(data=>{
+        return data;
+    })
+}
+const fetch_employees=async (Type)=>{
+    return await saveData.fetchEmployee(Type).then(data=>{
+        return data.data();
+    })
+}
+
+module.exports={add_employees,get_employees,fetch_employees};

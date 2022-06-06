@@ -1,6 +1,7 @@
 require("dotenv").config();
 const admin = require('firebase-admin');
 const serviceAccount = require('./config_db');
+const {Collection} = require("mongoose");
 /** Initializes the database*/
 admin.initializeApp({
         credential: admin.credential.cert(serviceAccount)
@@ -37,23 +38,36 @@ const sortEmployeeByType=async (Type)=>{
         });
     })
 }
-const getAllEmployees=async (collectionPath)=>{
+const getAllEmployees=async (PersonType)=>{
     return  new Promise( function (resolve, reject) {
-        db.collection(collectionPath).get().then((snapshot) => {
+        let i=1;
+        let arrayofdocuments = [];
+        db.collection('Employees').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
-                let items = doc.data();
-                console.log('item first');
-                if (typeof items !== "undefined") {
-
-                    resolve(items);
+                if(typeof doc.data() !== "undefined")
+                {
+                    arrayofdocuments.push(doc.data());
                 }
+                if(i === snapshot._size )
+                {
+                    resolve(arrayofdocuments);
+                }
+                i++;
 
-                resolve({});
             });
-
+            resolve({});
         });
     });
 }
+const fetchEmployee=async (DocumentPath)=>{
+    try{
+        return db.collection('Employees').doc(DocumentPath).get().then();
+    }
+    catch(e) {
+        console.error(`An error occurred while connecting to the database: \n${e}`);
+    }
 
 
-module.exports={saveData,getAllEmployees,sortEmployeeByType};
+}
+
+module.exports={saveData,getAllEmployees,sortEmployeeByType,fetchEmployee};
