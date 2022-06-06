@@ -19,18 +19,18 @@ const saveData=async (collectionPath,documentName,object)=>
         }
 }
 const sortEmployeeByType=async (Type)=>{
-    let arrayofdocuments = [];
+    let storage = [];
     return  new Promise( function (resolve, reject) {
         let i=1;
         db.collection('Employees').get().then((snapshot) => {
             snapshot.docs.forEach(async doc => {
                 console.log(doc.data().employee_info.PersonType);
                 if (typeof doc.data().employee_info.PersonType !== "undefined" && doc.data().employee_info.PersonType ===Type) {
-                    arrayofdocuments.push(doc.data());
+                    storage.push(doc.data());
                 }
                 if(i === snapshot._size )
                 {
-                    resolve(arrayofdocuments);
+                    resolve(storage);
                 }
                 i++;
             });
@@ -38,19 +38,19 @@ const sortEmployeeByType=async (Type)=>{
         });
     })
 }
-const getAllEmployees=async (PersonType)=>{
+const getAllEmployees=async ()=>{
     return  new Promise( function (resolve, reject) {
         let i=1;
-        let arrayofdocuments = [];
+        let array_of_documents = [];
         db.collection('Employees').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
                 if(typeof doc.data() !== "undefined")
                 {
-                    arrayofdocuments.push(doc.data());
+                    array_of_documents.push(doc.data());
                 }
                 if(i === snapshot._size )
                 {
-                    resolve(arrayofdocuments);
+                    resolve(array_of_documents);
                 }
                 i++;
 

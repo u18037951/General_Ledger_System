@@ -20,12 +20,6 @@ router.post("/addEmployee", async (request, response, next)=>{
 });
 router.post("/getEmployee", async (request, response, next)=>{
 
-    if(!request.body.PersonType){
-        let error = new Error(`Malformed request. Please check your parameters`);
-        error.status = 400;
-        return next(error);
-    }
-    else{
         await userFunctions.get_employees(request.body.PersonType).then(data=>{
             return response.status(200).json(data);
         }).catch(err => {
@@ -33,7 +27,7 @@ router.post("/getEmployee", async (request, response, next)=>{
             error.status = 500;
             return next(error);
         });
-    }
+
 });
 router.post("/fetchEmployee", async (request, response, next)=>{
 

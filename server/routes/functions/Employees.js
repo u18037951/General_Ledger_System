@@ -15,7 +15,7 @@ const add_employees=async (email, user_info )=>{
          }
         await saveData.saveData('Employees', user_info.PersonType, created_object)
 }
-const get_employees=async (Type)=>{
+const get_employees=async ()=>{
     return await saveData.getAllEmployees('Employees').then(data=>{
         return data;
     })
