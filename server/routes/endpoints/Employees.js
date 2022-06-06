@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userFunctions =require('../functions/Employees')
 router.post("/addEmployee", async (request, response, next)=>{
-    console.log(request.body.email);
+
     if(!request.body.email){
         let error = new Error(`Malformed request. Please check your parameters`);
         error.status = 400;
