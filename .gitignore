@@ -5,3 +5,4 @@
 /server/node_modules
 General_ledger_System.iml
 /server/.env
+/coverage
