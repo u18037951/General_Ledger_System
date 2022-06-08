@@ -17,18 +17,16 @@ const SideBar = ({ user }) => {
                  <a href="#homeSubmenu">Employee</a>
              </li>
              <li>
-                 <a href="#">Assets</a>
+                 <a href="assets">Assets</a>
              </li>
              <li>
                  <a href="#pageSubmenu"
                     >Oracle Payable</a>
              </li>
              <li>
-                 <a href="#">Assignment</a>
+                 <a href="#">Reports</a>
              </li>
-             <li>
-                 <a href="#">Contact</a>
-             </li>
+
          </ul>
          <Button
              style={{margin: '5%'}}

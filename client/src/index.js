@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import Button from './components/Employee/AddEmployee'
+import Assets from "./components/Assets/Assets";
 import './index.css'
 import firebase  from './components/Auth/Authentication';
 import {
@@ -21,7 +22,8 @@ ReactDOM.render(
         <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<App />} />
-                    <Route path="Button" element={<Button />} />
+                    <Route path="home" element={<Button />} />
+                    <Route path="assets" element={<Assets />} />
                     <Route path="*" element={<App />} />
                 </Routes>
         </BrowserRouter>
