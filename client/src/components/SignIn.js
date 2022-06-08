@@ -20,9 +20,7 @@ const SignIn = () => {
     const [loginPassword, setLoginPassword] = useState("");
     return (
         <div
-            style={{
-                backgroundColor: 'blue',
-            }}>
+         >
             <div className="container-fluid">
                 <div className="row no-gutter">
 

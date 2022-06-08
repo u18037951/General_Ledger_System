@@ -20,7 +20,7 @@ router.post("/addEmployee", async (request, response, next)=>{
 });
 router.post("/getEmployee", async (request, response, next)=>{
 
-        await userFunctions.get_employees(request.body.PersonType).then(data=>{
+        await userFunctions.get_employees().then(data=>{
             return response.status(200).json(data);
         }).catch(err => {
             let error = new Error(err);
