@@ -42,17 +42,43 @@ router.post("/removeEmployee", async (request, response, next)=>{
 })
 router.post("/assignEmployee", async (request, response, next)=>{
 
-
+    await userFunctions.assign_employees(request.body.Employee_ID,request.body.Info).then(data=>{
+        return response.status(200).json(data);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
 })
 router.post("/addAssets", async (request, response, next)=>{
-
+    await userFunctions.addAssets(request.body.Name,request.body.Asset).then(data=>{
+        return response.status(200).json(data);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
 
 });
 router.post("/getAssets", async (request, response, next)=>{
+    await userFunctions.get_assets().then(data=>{
+        return response.status(200).json(data);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
 
 
 });
 router.post("/deleteAssets", async (request, response, next)=>{
+    await userFunctions.delete_assets(request.body.Name).then(data=>{
+        return response.status(200).json(data);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
 
 
 });

@@ -37,10 +37,25 @@ const get_employees=async ()=>{
         return data;
     })
 }
+const get_assets=async ()=>{
+    return await saveData.getAssets().then(data=>{
+        return data;
+    })
+}
+const delete_assets=async (name)=>{
+    return await saveData.deleteAssets(name).then(data=>{
+        return {Asset: name , response: 'Assets successfully deleted!'};
+    })
+}
 const fetch_employees=async (Type)=>{
     return await saveData.fetchEmployee(Type).then(data=>{
         return data.data();
     })
+}
+const assign_employees=async (EmployeeID,obj)=>{
+        await saveData.saveData('Assignments', EmployeeID, obj);
+        return {EmployeeID: EmployeeID , response: 'Employee successfully Assigned A position!'};
+
 }
 const generateEmployeeID = async (object)=> {
     const text ='__';
@@ -51,10 +66,9 @@ const generateEmployeeID = async (object)=> {
     return employeeID;
 
 }
-const assignAssets = async (email, assets_object)=> {
-
-    await saveData.saveData('Assets', email,  assets_object)
-    return {email: email , Response : 'Assets successfully added'};
+const addAssets = async (name, assets_object)=> {
+    await saveData.saveData('Assets', name,  assets_object)
+    return {name: name , Response : 'Assets successfully added'};
 }
 const removeAssets = async (email)=> {
 
@@ -119,4 +133,4 @@ const generateInvoice = async (email)=> {
     })
 
 }
-module.exports={add_employees,get_employees,fetch_employees, assignAssets,removeAssets,addPayment,getPayment,generateInvoice,delete_employees};
+module.exports={add_employees,get_employees,fetch_employees, addAssets,removeAssets,addPayment,getPayment,generateInvoice,delete_employees,assign_employees,get_assets,delete_assets};

@@ -78,6 +78,16 @@ const fetchEmployee=async (DocumentPath)=>{
 
 
 }
+const deleteAssets=async (DocumentPath)=>{
+    try{
+        return db.collection('Assets').doc(DocumentPath).delete();
+    }
+    catch(e) {
+        console.error(`An error occurred while connecting to the database: \n${e}`);
+    }
+
+
+}
 const getPayments=async (email)=>{
     try{
         return db.collection('Payment').doc(email).get().then();
@@ -88,4 +98,26 @@ const getPayments=async (email)=>{
 
 
 }
-module.exports={saveData,getAllEmployees,sortEmployeeByType,fetchEmployee,getPayments,saveDataNoMerge};
+const getAssets=async ()=>{
+    return  new Promise( function (resolve, reject) {
+        let i=1;
+        let array_of_documents = [];
+        db.collection('Assets').get().then((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                if(typeof doc.data() !== "undefined")
+                {
+                    array_of_documents.push(doc.data());
+                }
+                if(i === snapshot._size )
+                {
+                    resolve(array_of_documents);
+                }
+                i++;
+
+            });
+            resolve({});
+        });
+    });
+
+}
+module.exports={saveData,getAllEmployees,sortEmployeeByType,fetchEmployee,getPayments,saveDataNoMerge,getAssets,deleteAssets};
