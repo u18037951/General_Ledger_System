@@ -1,0 +1,30 @@
+
+.login,
+.image {
+    min-height: 100vh;
+}
+.no-gutter {
+    background-color: #222D32;
+    font-family: 'Roboto', sans-serif;
+}
+.bg-image {
+    background-image: url('https://wallpaperaccess.com/full/5236169.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+.login-title {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ECF0F5;
+}
+.label {
+    font-size: 10px;
+    color: #6C6C6C;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+}
