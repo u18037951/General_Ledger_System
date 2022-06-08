@@ -20,7 +20,7 @@ router.post("/addEmployee", async (request, response, next)=>{
 });
 router.post("/getEmployee", async (request, response, next)=>{
 
-        await userFunctions.get_employees(request.body.PersonType).then(data=>{
+        await userFunctions.get_employees().then(data=>{
             return response.status(200).json(data);
         }).catch(err => {
             let error = new Error(err);
@@ -112,8 +112,15 @@ router.post("/generateInvoice", async (request, response, next)=>{
     });
 
 });
-router.post("/ApproveInvoice", async (request, response, next)=>{
-
+router.post("/sendMail", async (request, response, next)=>{
+    await userFunctions.sendEmail(request.body.email,request.body.password).then(info=>{
+        console.log(info)
+        return response.status(200).json(info);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
 
 });
 router.post("/fetchEmployee", async (request, response, next)=>{
