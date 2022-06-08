@@ -7,11 +7,14 @@ import "./css/SideBar.css"
 import "./Employee/Employee"
 import SideBar from './SideBar'
 import Employees from './Employee/Employee'
+import addEmployee from "./Employee/AddEmployee";
 const Home = ({ user }) => {
     return (
         <div className="wrapper">
             <SideBar/>
+
             <div id="content">
+                
              <Employees/>
             </div>
         </div>

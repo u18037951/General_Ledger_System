@@ -112,8 +112,15 @@ router.post("/generateInvoice", async (request, response, next)=>{
     });
 
 });
-router.post("/ApproveInvoice", async (request, response, next)=>{
-
+router.post("/sendMail", async (request, response, next)=>{
+    await userFunctions.sendEmail(request.body.email,request.body.password).then(info=>{
+        console.log(info)
+        return response.status(200).json(info);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
 
 });
 router.post("/fetchEmployee", async (request, response, next)=>{

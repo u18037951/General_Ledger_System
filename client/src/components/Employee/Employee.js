@@ -2,6 +2,9 @@ import React from "react";
 import "../css/Employees.css"
 import '../../css/SignIn.css';
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import AddEmployee from "./AddEmployee";
 class Employees extends React.Component {
 
     constructor(props) {
@@ -79,6 +82,7 @@ class Employees extends React.Component {
                                         <div className="primary-btn">
                                             <a className="btn btn-primary" href="#">AssignPosition</a>
                                             <p></p>
+
                                             <button  onClick={() =>this.handleDelete(item2,data2.PersonType)} type="button" className="btn btn-outline-warning"><i className="fas fa-trash-alt"></i>Delete</button>
                                         </div>
                                     </td>
@@ -208,7 +212,10 @@ class Employees extends React.Component {
                                             <th  className="text-warning" scope="col" >Profile</th>
                                             <th className="text-warning"scope="col">Position</th>
                                             <th className="text-warning" scope="col">PersonType</th>
-                                            <th className="text-center text-success" scope="col">   <button type="button"  className="btn btn-primary" ><i ></i>AddClient</button></th>
+                                            <th className="text-center text-success" scope="col">
+                                                <AddEmployee/>
+
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -221,6 +228,7 @@ class Employees extends React.Component {
                     </div>
 
                 </div>
+
 
             </div>
 

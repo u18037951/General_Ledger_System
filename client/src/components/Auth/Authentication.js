@@ -35,7 +35,7 @@ export const signInWithGoogle = async () => {
             });
         }
     } catch (err) {
-        alert(err.message);
+        alert('The Password or username is incorrect contact Adim');
     }
 };
 
@@ -43,7 +43,7 @@ export const signInWithEmailAndPassword = async (email, password) => {
     try {
         await auth.signInWithEmailAndPassword(email, password);
     } catch (err) {
-        alert(err.message);
+        alert('The Password or username is incorrect contact Adim');
     }
 };
 
@@ -58,6 +58,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
             email,
         });
     } catch (err) {
-        alert(err.message);
+        return 'error adding a Client';
+       // alert(err.message);
     }
 };

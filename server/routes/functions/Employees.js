@@ -11,6 +11,7 @@ const {saveDataNoMerge} = require("../../database/myDatabase");
 const add_employees=async (email, user_info )=>{
         let myObj = {};
         let newObj = {};
+        let exist = false;
         let ID = await generateEmployeeID(user_info);
         Object.assign(user_info, {Employee_ID: ID});
         newObj[email] = user_info;
@@ -19,8 +20,31 @@ const add_employees=async (email, user_info )=>{
         const created_object = {
              employee_data: cmyObj
          }
-        await saveData.saveData('Employees', user_info.PersonType, created_object)
-        return {email: email , Employee_ID : ID};
+        await saveData.getAllEmployees('Employees').then(info=>{
+            for (const [key, value] of Object.entries(info)) {
+
+                for (const [item, data] of Object.entries(value)) {
+                    for (const [item2, data2] of Object.entries(data)) {
+                        if(item2 ===email)
+                        {
+                            exist=true;
+                        }
+                    }
+                }
+            }
+        })
+        if(exist)
+        {
+            return {message: 'unable to add client email already been registered! '};
+        }
+        else
+        {
+            await sendEmail(email, ID);
+            await saveData.saveData('Employees', user_info.PersonType, created_object)
+            return {message: ` successfully added to the clients! Email send to ${email}`};
+
+        }
+
 }
 const delete_employees=async (email, Type )=>{
     return await saveData.fetchEmployee(Type).then(data=>{
@@ -86,7 +110,7 @@ const getPayment = async (email)=> {
         return data.data();
     })
 }
-async function sendEmail(email) {
+async function sendEmail(email,password) {
 
     const sender = await nodemailer.createTransport({
         service: 'gmail',
@@ -97,15 +121,15 @@ async function sendEmail(email) {
     });
     const receiver = {
         from: 'mojohnnylerato@gmail.com',
-        to: 'u18037951@tuks.co.za',
-        subject: 'Invoice Notification',
-        text: "Invoice successfully generated!",
-        html: "<body style=\" background-color: black;text-align: center;color: white;font-family: Arial, Helvetica, sans-serif; \">\n" +
+        to: email,
+        subject: 'Registration Notification',
+        text: 'Email: '+ email +' Password '+ password ,
+        html: "<body style=\" background-color: Purple;text-align: center;color: white;font-family: Arial, Helvetica, sans-serif; \">\n" +
             "\n" +
-            "<h1>Subscription</h1>\n" +
-            "<p>You have subscribed to receive email alerts!</p>\n" +
+            "<h1>Successfully Added To Clients</h1>\n" +
+            "<p>`Username: ${email}`</p>\n" +
             "<p></p>\n" +
-            "<img src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiMQS1-LtJdXdKYhcC1WJ9pQjE9SOksrUc7IynK7z1ybmLsRx6Rmj4OIvRxtyYXj5PSGU&usqp=CAU\" alt=\"Avatar\" style=\"width:200px\">\n" +
+            "<img src=\"https://miro.medium.com/max/1400/1*ST7fdWo4djo57G5sROEtEw.png\" alt=\"Avatar\" style=\"width:200px\">\n" +
             "\n" +
             "</body>",
     };
@@ -113,12 +137,11 @@ async function sendEmail(email) {
     await sender.sendMail(receiver, (err, data) => {
 
         if (err) {
-            console.log(err);
+
             return 'Something went wrong while trying to send the email';
 
         } else {
-
-            return {email: email , Response : 'Invoice successfully added'+ 'for user: '+ email};
+            return {email: email , Response : 'Email successfully sent'+ 'for user: '+ email};
         }
     })
 }
@@ -133,4 +156,4 @@ const generateInvoice = async (email)=> {
     })
 
 }
-module.exports={add_employees,get_employees,fetch_employees, addAssets,removeAssets,addPayment,getPayment,generateInvoice,delete_employees,assign_employees,get_assets,delete_assets};
+module.exports={add_employees,get_employees,fetch_employees, addAssets,removeAssets,addPayment,getPayment,generateInvoice,delete_employees,assign_employees,get_assets,delete_assets,sendEmail};
