@@ -3,8 +3,10 @@ import './../css/App.css';
 import Login from './Login';
 import SignIn from './SignIn';
 import Home from './Dashboard';
+import SideBar from './Employee/SideBar'
 import firebase  from './Auth/Authentication';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Dashboard from "./Dashboard";
 
 function App() {
     const [user, setUser] = useState(null);

@@ -18,6 +18,15 @@ const saveData=async (collectionPath,documentName,object)=>
             console.error(`An error occurred while connecting to the database: \n${e}`);
         }
 }
+const saveDataNoMerge=async (collectionPath,documentName,object)=>
+{
+    try{
+        await db.collection(collectionPath).doc(documentName).set(object);
+    }
+    catch(e) {
+        console.error(`An error occurred while connecting to the database: \n${e}`);
+    }
+}
 const sortEmployeeByType=async (Type)=>{
     let storage = [];
     return  new Promise( function (resolve, reject) {
@@ -69,5 +78,14 @@ const fetchEmployee=async (DocumentPath)=>{
 
 
 }
+const getPayments=async (email)=>{
+    try{
+        return db.collection('Payment').doc(email).get().then();
+    }
+    catch(e) {
+        console.error(`An error occurred while connecting to the database: \n${e}`);
+    }
 
-module.exports={saveData,getAllEmployees,sortEmployeeByType,fetchEmployee};
+
+}
+module.exports={saveData,getAllEmployees,sortEmployeeByType,fetchEmployee,getPayments,saveDataNoMerge};

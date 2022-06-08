@@ -29,6 +29,67 @@ router.post("/getEmployee", async (request, response, next)=>{
         });
 
 });
+router.post("/removeEmployee", async (request, response, next)=>{
+    await userFunctions.delete_employees(request.body.email,request.body.PersonType).then(data=>{
+        return response.status(200).json(data);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
+
+
+})
+router.post("/assignEmployee", async (request, response, next)=>{
+
+
+})
+router.post("/addAssets", async (request, response, next)=>{
+
+
+});
+router.post("/getAssets", async (request, response, next)=>{
+
+
+});
+router.post("/deleteAssets", async (request, response, next)=>{
+
+
+});
+router.post("/addPayments", async (request, response, next)=>{
+    await userFunctions.addPayment(request.body.email, request.body.item).then(data=>{
+        return response.status(200).json(data);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
+
+});
+router.post("/getPayments", async (request, response, next)=>{
+    await userFunctions.getPayment(request.body.email).then(info=>{
+        return response.status(200).json(info);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
+
+});
+router.post("/generateInvoice", async (request, response, next)=>{
+    await userFunctions.generateInvoice(request.body.email).then(info=>{
+        return response.status(200).json(info);
+    }).catch(err => {
+        let error = new Error(err);
+        error.status = 500;
+        return next(error);
+    });
+
+});
+router.post("/ApproveInvoice", async (request, response, next)=>{
+
+
+});
 router.post("/fetchEmployee", async (request, response, next)=>{
 
     if(!request.body.PersonType){
