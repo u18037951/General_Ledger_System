@@ -1,11 +1,6 @@
 import Button from "react-bootstrap/Button";
 import {Col, Form, InputGroup, Modal} from "react-bootstrap";
-import {render} from "react-dom";
-import {
-    signInWithGoogle,
-    signInWithEmailAndPassword,
-    registerWithEmailAndPassword
-} from "../Auth/Authentication";
+import { useAuth } from "../Auth/Authentication"
 import {useState} from "react";
 import * as PropTypes from "prop-types";
 import axios from "axios";
@@ -22,7 +17,7 @@ TextField.propTypes = {
     required: PropTypes.bool
 };
 
-function AddButton() {
+function AddButton(prop) {
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
     const [Title, setTitle] = useState("");
@@ -30,8 +25,16 @@ function AddButton() {
     const [PersonType, setPersonType] = useState("");
     const [SocialSecurityNumber, setSocialSecurityNumber] = useState("");
     const [Age, setAge] = useState("");
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const { signup, currentUser } = useAuth()
+    const handleClose = () => {
+        prop.propFunction();
+        setShow(false);
+    }
+    const handleShow = () =>{
+        prop.propFunction();
+        setShow(true);
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         let  RequestObj = {
@@ -47,21 +50,24 @@ function AddButton() {
                 SocialSecurityNumber: SocialSecurityNumber
             }
         }
+
             axios.post('http://localhost:3443/addEmployee',RequestObj)
             .then(response => {
-                registerWithEmailAndPassword(name,email, response.data.Employee_ID).then(r =>
+                signup( email , response.data.Id).then(r =>
                     {
-
+                            prop.propFunction();
                             alert(` ${response.data.message} `)
 
 
                     }
                 ).catch(err=>{
-                    alert(`unable to register ${name}`)
+                    prop.propFunction();
+                    alert(`successfully added employee ${name} Email sent to ${email}`)
                 });
                //  window.location.reload();
 
             }).catch(err=>{
+                prop.propFunction();
                 alert(`Error has occurred adding Client`)
         })
 

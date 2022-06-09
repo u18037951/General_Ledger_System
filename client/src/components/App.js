@@ -1,28 +1,25 @@
-import { useState, useEffect } from 'react';
+import {Route, Routes} from "react-router-dom"
+import { AuthProvider } from "./Auth/Authentication"
+import React,{ useEffect } from 'react';
 import './../css/App.css';
-import Login from './Login';
-import SignIn from './SignIn';
-import Home from './Dashboard';
-import Button from './Employee/AddEmployee'
-import firebase  from './Auth/Authentication';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UpdatePassword from "./Login/UpdatePassword";
 import Dashboard from "./Dashboard";
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import SignIn from "./SignIn";
+import Assets from "./Assets/Assets";
 function App() {
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged(user => {
-            setUser(user);
-        })
-    }, [])
-
     return (
-        <div className="app"  >
-            {user ? <Home user={user} /> : <SignIn/>}
 
-        </div>
-
+        <AuthProvider>
+            <Routes>
+                    {/* <Route exact path="/" component={Home}/>*/}
+                    <Route exact path="/" element={<SignIn/>}></Route>
+                    <Route exact path="/home" element={<Dashboard/>}/>
+                    <Route exact path="/assets" element={<Assets/>}/>
+                     <Route exact path="/updatePassword" element={<UpdatePassword/>}/>
+                    {/*<PrivateRoute exact path="/landing" component={LandingPage}/>*/}
+            </Routes>
+        </AuthProvider>
     );
 }
 

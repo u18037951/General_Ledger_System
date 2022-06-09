@@ -1,21 +1,33 @@
-import {
-    signInWithGoogle,
-    signInWithEmailAndPassword,
-    registerWithEmailAndPassword
-} from "./Auth/Authentication";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
+import { useAuth } from "./Auth/Authentication"
 import React, { useState } from "react";
 import '../css/SignIn.css';
-
+import {Link, useNavigate} from 'react-router-dom';
 const SignIn = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-
+    const { login, currentUser } = useAuth()
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
 
+    async function handleSubmit(x,y) {
+        try {
+            setError("")
+            setLoading(true)
+            await login(x, y)
+            navigate('/home');
+            localStorage.setItem('emailSession',x);
+        } catch(err)
+        {
+            setError("Failed to login!")
+        }
+
+        setLoading(false)
+    }
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     return (
@@ -74,15 +86,20 @@ const SignIn = () => {
                                                                 variant="outline-success"
                                                                 type="submit"
                                                                 onClick={() => {
-                                                                    signInWithEmailAndPassword(loginEmail, loginPassword);
+                                                                    handleSubmit(loginEmail, loginPassword);
                                                                 }}
                                                             >
                                                                 Login
                                                             </Button>
+                                                            <p></p>
+                                                                <Link to="/updatePassword" className="label"><Button bsStyle="danger">Reset Password</Button></Link>
+
                                                         </div>
+
                                                     </div>
                                                 </Card.Body>
                                             </Card>
+
                                         </div>
                                     </div>
                                 </div>
