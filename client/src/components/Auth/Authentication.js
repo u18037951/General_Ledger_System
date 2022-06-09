@@ -1,64 +1,69 @@
 import firebase from "firebase/compat/app";
 import { getFirestore, collection, addDoc, where, query, getDocs} from "firebase/firestore"
 import "firebase/compat/auth";
+import {auth, db} from "./firebase";
+import React, { useContext, useState, useEffect } from "react"
 
-const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_ID
-};
 
-firebase.initializeApp(firebaseConfig);
-const db = getFirestore();
+export const AuthContext = React.createContext();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+export function useAuth() {
+    return useContext(AuthContext)
+}
 
-export const auth = firebase.auth();
-export default firebase;
+export function AuthProvider({ children }) {
+    const [currentUser, setCurrentUser] = useState()
+    const [loading, setLoading] = useState(true)
 
-export const signInWithGoogle = async () => {
-    try {
-        const res = await auth.signInWithPopup(provider);
-        const user = res.user;
-        const userRef = collection(db, "users");
-        const result = await getDocs(query(userRef, where("uid", "==", user.uid)));
-        if (result.empty) {
-            await addDoc(collection(db, "users"), {
-                uid: user.uid,
-                name: user.displayName,
-                authProvider: "google",
-                email: user.email,
-            });
-        }
-    } catch (err) {
-        alert('The Password or username is incorrect contact Adim');
-    }
-};
-
-export const signInWithEmailAndPassword = async (email, password) => {
-    try {
-        await auth.signInWithEmailAndPassword(email, password);
-    } catch (err) {
-        alert('The Password or username is incorrect contact Adim');
-    }
-};
-
-export const registerWithEmailAndPassword = async (name, email, password) => {
-    try {
-        const res = await auth.createUserWithEmailAndPassword(email, password);
-        const user = res.user;
-        await addDoc(collection(db, "users"), {
-            uid: user.uid,
-            name,
-            authProvider: "local",
-            email,
+    function signup(email, password) {
+        return auth.createUserWithEmailAndPassword(email, password).then(async () => {
+            return await db.collection(`Users`).doc(email).set({user_id: email});
         });
-    } catch (err) {
-        return 'error adding a Client';
-       // alert(err.message);
+
     }
-};
+
+    function login(email, password) {
+        return auth.signInWithEmailAndPassword(email, password)
+    }
+
+    function logout() {
+        return auth.signOut()
+    }
+
+    function resetPassword(email) {
+        return auth.sendPasswordResetEmail(email)
+    }
+
+    function updateEmail(email) {
+        return currentUser.updateEmail(email)
+    }
+
+    function updatePassword(password) {
+        return currentUser.updatePassword(password)
+    }
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            setCurrentUser(user)
+            setLoading(false)
+        })
+
+        return unsubscribe
+    }, [])
+
+    const value = {
+        currentUser,
+        login,
+        signup,
+        logout,
+        resetPassword,
+        updateEmail,
+        updatePassword
+    }
+
+    return (
+        <AuthContext.Provider value={value}>
+            {!loading && children}
+        </AuthContext.Provider>
+    )
+}

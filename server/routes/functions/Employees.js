@@ -41,7 +41,7 @@ const add_employees=async (email, user_info )=>{
         {
             await sendEmail(email, ID);
             await saveData.saveData('Employees', user_info.PersonType, created_object)
-            return {message: ` successfully added to the clients! Email send to ${email}`};
+            return {message: ` successfully added to the clients! Email send to ${email}`, Id : ID };
 
         }
 

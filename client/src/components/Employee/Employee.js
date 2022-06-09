@@ -66,8 +66,7 @@ class Employees extends React.Component {
                                     </td>
                                     <td>
                                         <div className="primary-btn">
-                                            <a className="btn btn-primary" href="#">AssignPosition</a>
-                                            <p></p>
+
 
                                             <button  onClick={() =>this.handleDelete(item2,data2.PersonType)} type="button" className="btn btn-outline-warning"><i className="fas fa-trash-alt"></i>Delete</button>
                                         </div>

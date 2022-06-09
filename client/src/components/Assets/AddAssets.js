@@ -1,8 +1,10 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/assets.css"
+import Depreciation from "./Depreciation";
 import axios from "axios";
 import ModalAssets from "./AddnewAssets";
+
 class Assets extends React.Component {
     constructor(props) {
         super(props)
@@ -49,7 +51,8 @@ class Assets extends React.Component {
                             <td>{Value.Date}</td>
                             <td>{Value.Description}</td>
                             <td>{Value.units}</td>
-                            <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a>
+                            <td>
+                                 <Depreciation price={Value.BookValue} prop2={Value.Date}/>
                             </td>
 
                         </tr>
