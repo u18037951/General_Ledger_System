@@ -14,7 +14,7 @@ const SideBar = ({ user }) => {
          <ul className="list-unstyled components">
              <p>Oracle Navigation Area</p>
              <li className="active">
-                 <a href="#homeSubmenu">Employee</a>
+                 <a href="/">Employee</a>
              </li>
              <li>
                  <a href="assets">Assets</a>

@@ -22,7 +22,7 @@ TextField.propTypes = {
     required: PropTypes.bool
 };
 
-function AddButton() {
+function AddButton(prop) {
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
     const [Title, setTitle] = useState("");
@@ -32,6 +32,7 @@ function AddButton() {
     const [Age, setAge] = useState("");
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         let  RequestObj = {
@@ -51,7 +52,7 @@ function AddButton() {
             .then(response => {
                 registerWithEmailAndPassword(name,email, response.data.Employee_ID).then(r =>
                     {
-
+                            prop.propFunction();
                             alert(` ${response.data.message} `)
 
 

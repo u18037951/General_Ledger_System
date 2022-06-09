@@ -1,7 +1,69 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/assets.css"
+import axios from "axios";
+import ModalAssets from "./AddnewAssets";
 class Assets extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            display: []
+        }
+        this.state = {
+            object: {}
+        }
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleView = this.handleView.bind(this);
+    }
+    handleDelete = (x)=> {
+        let reqObj = {
+            Name: x
+        }
+
+        axios.post('http://localhost:3443/deleteAssets',reqObj)
+            .then(response => {
+                   this.handleView();
+                   alert(x + ' Asset Has been successfully deleted!')
+            })
+    }
+    handleView = ()=> {
+        axios.post('http://localhost:3443/getAssets',{})
+            .then(response => {
+                let assets = [];
+                let i=0;
+                for (const [key, Value] of Object.entries(response.data)) {
+                    i++;
+                    assets.push(
+                        <tr>
+                            <td>
+                                <ul className="action-list">
+                                    <li><a  onClick={() =>this.handleDelete(Value.Name)} className="btn btn-danger"><i
+                                        className="fa fa-times"></i></a></li>
+                                </ul>
+                            </td>
+
+                            <td>{Value.Name}</td>
+                            <td>{Value.AssetNumber}</td>
+                            <td>{Value.AssetType}</td>
+                            <td>R{Value.BookValue}</td>
+                            <td>{Value.Date}</td>
+                            <td>{Value.Description}</td>
+                            <td>{Value.units}</td>
+                            <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a>
+                            </td>
+
+                        </tr>
+                    )
+                    if(i === Object.keys(response.data).length){
+                        this.setState({ display : assets })
+                    }
+                }
+            })
+    }
+    componentDidMount(){
+
+         this.handleView();
+    }
     render() {
         return <div className="container">
             <div className="row">
@@ -9,16 +71,14 @@ class Assets extends React.Component {
                     <div className="panel">
                         <div className="panel-heading">
                             <div className="row">
-                                <div className="col-sm-12 col-xs-12">
-                                    <a href="#" className="btn btn-sm btn-primary pull-left"><i
-                                        className="fa fa-plus-circle"></i> Add New</a>
-                                </div>
+                                  <ModalAssets fun = {this.handleView}/>
                             </div>
                         </div>
                         <div className="panel-body table-responsive">
                             <table className="table">
                                 <thead>
                                 <tr>
+                                    <th>Delete</th>
                                     <th>Name</th>
                                     <th>Asset#</th>
                                     <th>Type</th>
@@ -26,27 +86,11 @@ class Assets extends React.Component {
                                     <th>date</th>
                                     <th>Description</th>
                                     <th>Units</th>
+                                    <th>View</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <ul className="action-list">
-                                            <li><a href="#" className="btn btn-primary"><i
-                                                className="fa fa-pencil-alt"></i></a></li>
-                                            <li><a href="#" className="btn btn-danger"><i
-                                                className="fa fa-times"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td>1</td>
-                                    <td>Vincent Williamson</td>
-                                    <td>31</td>
-                                    <td>31</td>
-                                    <td>31</td>
-                                    <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a>
-                                    </td>
-
-                                </tr>
+                                {this.state.display}
                                 </tbody>
                             </table>
                         </div>
