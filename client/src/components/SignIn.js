@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import { useAuth } from "./Auth/Authentication"
 import React, { useState } from "react";
 import '../css/SignIn.css';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 const SignIn = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -92,7 +92,8 @@ const SignIn = () => {
                                                                 Login
                                                             </Button>
                                                             <p></p>
-                                                            <Button bsStyle="danger">Reset Password</Button>
+                                                                <Link to="/updatePassword" className="label"><Button bsStyle="danger">Reset Password</Button></Link>
+
                                                         </div>
 
                                                     </div>
