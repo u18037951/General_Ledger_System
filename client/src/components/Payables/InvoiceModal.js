@@ -23,7 +23,7 @@ function Invoice(prop) {
     const handleShow = () => setShow(true);
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(Email)
+
         let  RequestObj = {
 
             email: Email,

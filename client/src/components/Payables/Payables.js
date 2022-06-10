@@ -4,7 +4,9 @@ import "../css/payables.css"
 import axios from "axios";
 import ModalAssets from "../Assets/AddnewAssets";
 import InvoiceModal from "./InvoiceModal";
+import {Link} from "react-router-dom";
 class Payables extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -55,8 +57,33 @@ class Payables extends React.Component {
                             <td>{Value.quantity}</td>
                             <td>
                                 <ul className="action-list">
-                                    <li><a  onClick={() =>this.handleGenerate(Value.email)} className="btn btn-danger"><i
-                                        className="fa fa-university"></i></a></li>
+                                    <Link state={
+                                        {email: Value.email,Amount: Value.Amount,Price: Value.Price,Street: Value.Street,City: Value.City,
+                                            code: Value.code,description: Value.description,name: Value.name,Date: Value.Date, Quantity:Value.Quantity
+                                        }
+                                    }
+
+                                        className={
+                                            "text-xs uppercase py-3 font-bold block " +
+                                            (window.location.href.indexOf("/invoicePDF") !== -1
+                                                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                                                : "text-blueGray-700 hover:text-blueGray-500")
+                                        }
+                                        to="/invoicePDF"
+
+                                    >
+                                        <i
+                                            className={
+                                                "fas fa-chart-line mr-2 text-sm " +
+                                                (window.location.href.indexOf("/invoicePDF") !== -1
+                                                    ? "opacity-75"
+                                                    : "text-blueGray-300")
+                                            }
+                                        />{" "}
+                                        <li><a className="btn btn-danger"><i
+                                            className="fa fa-university"></i></a></li>
+                                    </Link>
+
                                 </ul>
                             </td>
                         </tr>
