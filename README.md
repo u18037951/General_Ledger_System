@@ -15,7 +15,7 @@ The current state of many organisations is that data is dispersed across multipl
 - [SRS Document](https://drive.google.com/file/d/1AbZbBrYfmVr12KHqiEuUx275cP3dCVOX/view?usp=sharing)
 - [Architecture Document](https://drive.google.com/file/d/1ywB9H3cgIgb0krXr4bGDsGE99CKEPBRX/view?usp=sharing)
 ## Demo Videos
-- [Demo]()
+- [Demo](https://drive.google.com/file/d/1GpG_s7svdEHvLYPreYOMP6XmjYOdJdb8/view?usp=sharing)
 ## Project Management
 - [Github Project Board](https://github.com/u18037951/OracleEBS_General_Ledger_System/projects/2)
 
