@@ -20,7 +20,7 @@ class Employees extends React.Component {
     }
     handleView = ()=> {
 
-        axios.post('http://localhost:3443/getEmployee',{})
+        axios.post('https://oracleglmanagement.herokuapp.com/getEmployee',{})
             .then(response => {
                 this.setState({ object : response.data })
                 const employees= this.state.object;
@@ -111,7 +111,7 @@ class Employees extends React.Component {
             email: x,
             PersonType: y
         }
-        axios.post('http://localhost:3443/removeEmployee', RequestObj )
+        axios.post('https://oracleglmanagement.herokuapp.com/removeEmployee', RequestObj )
             .then(() => {
                    this.handleView();
             })

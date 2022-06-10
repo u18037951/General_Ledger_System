@@ -36,7 +36,7 @@ function ModalAssets(prop) {
                 Date: Date
             }
         }
-        axios.post('http://localhost:3443/addAssets',RequestObj)
+        axios.post('https://oracleglmanagement.herokuapp.com/addAssets',RequestObj)
             .then(response => {
                 prop.fun();
                 alert(response.data.name + ''+ response.data.Response);
