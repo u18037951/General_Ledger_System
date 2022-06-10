@@ -18,6 +18,5 @@ The current state of many organisations is that data is dispersed across multipl
 - [Demo 1]()
 ## Project Management
 - [Github Project Board](https://github.com/COS301-SE-2021/Crypto-Market-Analysis/projects/1)
-method=search&context=course_entry&course_id=_140238_1&handle=announcements_entry&mode=view#)
 
 
