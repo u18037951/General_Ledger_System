@@ -7,6 +7,7 @@ import UpdatePassword from "./Login/UpdatePassword";
 import Dashboard from "./Dashboard";
 import SignIn from "./SignIn";
 import Assets from "./Assets/Assets";
+import PayableInvoice from "./Payables/PayableInvoice";
 function App() {
     return (
 
@@ -16,6 +17,7 @@ function App() {
                     <Route exact path="/" element={<SignIn/>}></Route>
                     <Route exact path="/home" element={<Dashboard/>}/>
                     <Route exact path="/assets" element={<Assets/>}/>
+                      <Route exact path="/invoice" element={<PayableInvoice/>}/>
                      <Route exact path="/updatePassword" element={<UpdatePassword/>}/>
                     {/*<PrivateRoute exact path="/landing" component={LandingPage}/>*/}
             </Routes>
