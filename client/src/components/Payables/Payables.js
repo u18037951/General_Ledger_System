@@ -35,7 +35,7 @@ class Payables extends React.Component {
         let req = {
             collection: "Payment"
         }
-        axios.post('http://localhost:3443/getAll',req)
+        axios.post('https://oracleglmanagement.herokuapp.com/getAll',req)
             .then(response => {
                 console.log(response.data)
                 let assets = [];
