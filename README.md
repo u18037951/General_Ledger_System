@@ -13,7 +13,7 @@ The current state of many organisations is that data is dispersed across multipl
 ## Documentation
 - [User Manual](https://drive.google.com/file/d/1MRePak0lvf7FEre8fFM_U0R9KSRXobJ1/view?usp=sharing)
 - [SRS Document](https://drive.google.com/file/d/1AbZbBrYfmVr12KHqiEuUx275cP3dCVOX/view?usp=sharing)
-- [Architecture Document](https://drive.google.com/file/d/1ywB9H3cgIgb0krXr4bGDsGE99CKEPBRX/view?usp=sharing)
+- [Architecture Document](https://drive.google.com/file/d/1OHv-SQL8qXploLz-70bJDCk_CDAVaQ7a/view?usp=sharing)
 ## Demo Videos
 - [Demo](https://drive.google.com/file/d/1GpG_s7svdEHvLYPreYOMP6XmjYOdJdb8/view?usp=sharing)
 ## Project Management
