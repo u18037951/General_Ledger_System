@@ -11,7 +11,7 @@ Oracle Financials is an Enterprise Resource Planning Software Solution that enab
 The current state of many organisations is that data is dispersed across multiple departments employees have to be trained extensively to extract the data from multiple departments, By having a centralised database allowing employees to access their necessary tools from one centralised system will help them utilize their time efficiently and allowing retrieval of information easier and faster, which allows an organisations to save money and time.
 
 ## Documentation
-- [User Manual](https://drive.google.com/file/d/1mukS3I-qJz4Hft0iC6WyMCH-3Pd7MG6Y/view?usp=sharing)
+- [User Manual]([https://drive.google.com/file/d/1mukS3I-qJz4Hft0iC6WyMCH-3Pd7MG6Y/view?usp=sharing](https://drive.google.com/file/d/1MRePak0lvf7FEre8fFM_U0R9KSRXobJ1/view?usp=sharing))
 - [SRS Document](https://drive.google.com/file/d/1AbZbBrYfmVr12KHqiEuUx275cP3dCVOX/view?usp=sharing)
 - [Architecture Document](https://drive.google.com/file/d/1ywB9H3cgIgb0krXr4bGDsGE99CKEPBRX/view?usp=sharing)
 ## Demo Videos
