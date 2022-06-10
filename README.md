@@ -17,7 +17,7 @@ The current state of many organisations is that data is dispersed across multipl
 ## Demo Videos
 - [Demo]()
 ## Project Management
-- [Github Project Board]()
+- [Github Project Board](https://github.com/u18037951/OracleEBS_General_Ledger_System/projects/2)
 
 ## Github Branching
 ### Master
