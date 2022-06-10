@@ -19,4 +19,7 @@ The current state of many organisations is that data is dispersed across multipl
 ## Project Management
 - [Github Project Board]()
 
-
+## Github Branching
+### Master
+#### Develop
+##### Feature
