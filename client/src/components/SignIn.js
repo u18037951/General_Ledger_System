@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import '../css/SignIn.css';
 import {Link, useNavigate} from 'react-router-dom';
 const SignIn = () => {
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const { login, currentUser } = useAuth()

@@ -22,14 +22,14 @@ class Assets extends React.Component {
             Name: x
         }
 
-        axios.post('http://localhost:3443/deleteAssets',reqObj)
+        axios.post('https://oracleglmanagement.herokuapp.com/deleteAssets',reqObj)
             .then(response => {
                    this.handleView();
                    alert(x + ' Asset Has been successfully deleted!')
             })
     }
     handleView = ()=> {
-        axios.post('http://localhost:3443/getAssets',{})
+        axios.post('https://oracleglmanagement.herokuapp.com/getAssets',{})
             .then(response => {
                 let assets = [];
                 let i=0;
