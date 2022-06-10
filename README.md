@@ -1,1 +1,3 @@
-# OracleEBS_General_Ledger_System
+# OracleE Buddy Web
+
+ 
